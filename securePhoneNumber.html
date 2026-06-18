@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure phone number</title>
+</head>
+<body style="font-family: system-ui, sans-serif">
+    <header style="text-align: center;">
+        <h1>Phone Number Masker</h1>
+    </header>
+
+    <main style="width: min(80%, 600px); margin: 0 auto; display: flex;
+        flex-direction: column;">
+        <section>
+            <label for="Input" style=" margin:5px 0 0 5px;">Enter text:</label>
+            <textarea id="Input" placeholder="My phone number is: 09123456789"></textarea>
+        </section>
+
+        <section id="buttons">
+            <div>
+                <button id="Mask" type="button">Mask</button>
+                <button id="Clear" type="button">Clear</button>   
+            </div>
+        </section>
+
+        <section style="margin: 30px 0 0 0; padding-top: 5px;">
+            <label for="Output"  style="margin:5px 0 0 5px;">You can see the result here</label>
+            <textarea id="Output" readonly></textarea>
+            <button id="Copy" type="button">Copy</button>
+        </section>
+
+        <footer>
+            <p id="status" style="color: grey; font-size: 10px;
+            margin-top: 15px;"></p>
+        </footer>
+    </main>
+    
+    <style>
+        section{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button{
+            width: 80px;
+            height: 30px;
+            cursor: pointer;
+            border: 1px solid ;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+        button:hover{
+            opacity: 0.9;
+        }
+        button:active{
+            transform: translateY(1px);
+        }
+        
+        #buttons{
+            margin: 10px 0 0 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        textarea{
+            resize: none;
+            height: auto;
+            min-height: 20px;
+            max-height: 100px;
+            overflow-y: visible;
+            border: 1px solid rgba(0, 0, 0, 0.501);
+            border-radius: 2px;
+        }  
+        textarea:focus{
+            outline: 1px solid rgba(0, 0, 0, 0.626);
+            caret-color: rgba(0, 0, 0, 0.652);
+        }      
+
+        #Mask{
+            font-size: 15px;
+            margin-right: 6px;
+            background-color: rgba(57, 167, 207, 0.921);
+            border: 1px solid rgba(65, 128, 210, 0.921);
+            color: white;
+            border-radius: 3px;
+            transition: background-color 0.4s ease;
+        }
+        #Mask:active{
+            background-color: rgba(37, 100, 183, 0.921);
+        }
+
+        #Clear{
+            font-size: 15px;
+            background-color: rgba(213, 28, 28, 0.645);
+            color: white;
+            border-radius: 3px;
+            border: 1px solid rgba(211, 43, 226, 0.666);
+            transition: background-color 0.4s ease;
+        }
+        #Clear:active{
+            background-color: rgba(178, 43, 54, 0.681);
+        }
+
+        #Copy{
+            font-size: 15px;
+            background-color: rgba(15, 195, 24, 0.822);
+            color: white;
+            border-radius: 3px;
+            border: 1px solid rgba(14, 154, 21, 0.822);
+            transition: background-color 0.4s ease;
+        }
+        #Copy:active{
+            background-color: rgba(47, 203, 55, 0.714);
+        }
+    </style>
+
+    <script>
+        const mask = document.getElementById('Mask');
+        const output = document.getElementById('Output');
+        const input = document.getElementById('Input');
+        const clear = document.getElementById('Clear');
+        const copy = document.getElementById('Copy');
+        const status = document.getElementById('status');
+
+
+        function securePhoneNumber(text){
+            return text.replace(/(?<!\d)(09\d{9})(?!\d)/g, (phone)=>{
+                return phone.slice(0, 4) + '***' + phone.slice(7);
+            });
+        };
+      
+        function countNumbers(text){
+            const matches = text.match(/09\d{9}/g);
+            return matches ? matches.length : 0;
+        };
+
+        mask.addEventListener('click', ()=>{
+            const text = input.value;
+            if(!text) return;
+
+            const result = securePhoneNumber(text);
+            const count = countNumbers(text);
+            output.value = result;
+            autoResize(output);
+            status.textContent = `${count} number(s) masked`
+        });
+        
+        mask.addEventListener('click', ()=>{
+            const text = input.value;
+            const result = securePhoneNumber(text);
+            output.value = result;
+            return result;
+        });
+
+        clear.addEventListener('click', ()=>{
+            input.value = '';
+            output.value = '';
+            autoResize(input);
+            autoResize(output);
+        });
+
+        copy.addEventListener('click', async ()=>{
+            const text = output.value;
+            if (!text) return;
+            try {
+                await
+                navigator.clipboard.writeText(text);
+                copy.textContent = 'copied';
+                setTimeout(()=>{
+                    copy.textContent = 'copy'
+                }, 1200);
+            } catch (error) {
+               console.error('copy failed: ', error); 
+            }
+        });
+
+        function autoResize(el){
+            el.style.height = "auto";
+            el.style.height =  Math.min(el.scrollHeight, 100) + "px";    
+        };
+        input.addEventListener('input', ()=>{
+            autoResize(input);
+        });
+        mask.addEventListener('click', ()=>{
+            const text = input.value;
+            const result = securePhoneNumber(text);
+            output.value = result;
+            autoResize(output);
+        });
+    </script>
+</body>
+</html>

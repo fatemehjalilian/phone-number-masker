@@ -17,8 +17,11 @@ The tool searches for phone numbers that:
 
 Example:
 
-Input: 09123456789
-output: 0912***6789
+Input: 
+09123456789
+
+output: 
+0912***6789
 
 It also works inside larger texts:
 
@@ -35,7 +38,7 @@ output: contact me with 0912***6789 or 0913***6789.
 - README.md
 
 ## Live demo
-
+https://fatemehjalilian.github.io/phone-number-masker/
 
 ## Author
 Fatemeh Jalilian

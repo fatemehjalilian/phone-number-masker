@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure phone number</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="font-family: system-ui, sans-serif">
+    <header style="text-align: center;">
+        <h1>Phone Number Masker</h1>
+    </header>
+
+    <main style="width: min(80%, 600px); margin: 0 auto; display: flex;
+        flex-direction: column;">
+        <section>
+            <label for="Input" style=" margin:5px 0 0 5px;">Enter text:</label>
+            <textarea id="Input" placeholder="My phone number is: 09123456789"></textarea>
+        </section>
+
+        <section id="buttons">
+            <div>
+                <button id="Mask" type="button">Mask</button>
+                <button id="Clear" type="button">Clear</button>
+            </div>
+        </section>
+
+        <section style="margin: 30px 0 0 0; padding-top: 5px;">
+            <label for="Output"  style="margin:5px 0 0 5px;">You can see the result here</label>
+            <textarea id="Output" readonly></textarea>
+            <button id="Copy" type="button">Copy</button>
+        </section>
+
+        <footer>
+            <p id="status" style="color: grey; font-size: 10px;
+            margin-top: 15px;"></p>
+        </footer>
+    </main>
+    
+    <script src="main.js"></script>
+</body>
+</html>

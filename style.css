@@ -1,0 +1,79 @@
+section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button{
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid ;
+    border-radius: 5px;
+    margin-top: 0;
+}
+button:hover{
+    opacity: 0.9;
+}
+button:active{
+    transform: translateY(1px);
+}
+
+#buttons{
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+textarea{
+    resize: none;
+    height: auto;
+    min-height: 20px;
+    max-height: 100px;
+    overflow-y: visible;
+    border: 1px solid rgba(0, 0, 0, 0.501);
+    border-radius: 2px;
+    word-wrap: 1px;
+}  
+textarea:focus{
+    outline: 1px solid rgba(0, 0, 0, 0.626);
+    caret-color: rgba(0, 0, 0, 0.652);
+}      
+
+#Mask{
+    font-size: 15px;
+    margin-right: 6px;
+    background-color: rgba(57, 167, 207, 0.921);
+    border: 1px solid rgba(65, 128, 210, 0.921);
+    color: white;
+    border-radius: 3px;
+    transition: background-color 0.4s ease;
+}
+#Mask:active{
+    background-color: rgba(37, 100, 183, 0.921);
+}
+
+#Clear{
+    font-size: 15px;
+    background-color: rgba(213, 28, 28, 0.645);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid rgba(211, 43, 226, 0.666);
+    transition: background-color 0.4s ease;
+}
+#Clear:active{
+    background-color: rgba(178, 43, 54, 0.681);
+}
+
+#Copy{
+    font-size: 15px;
+    background-color: rgba(15, 195, 24, 0.822);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid rgba(14, 154, 21, 0.822);
+    transition: background-color 0.4s ease;
+}
+#Copy:active{
+    background-color: rgba(47, 203, 55, 0.714);
+}

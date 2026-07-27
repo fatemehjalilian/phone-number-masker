@@ -12,6 +12,7 @@ A simple web tool that masks Iranian mobile phone numbers inside a text.
 - Supports both English and Persian digits
 - Added session storage support to preserve input, masked output, and status information after page refresh
 - Implemented a complete reset functionality that removes all stored data and cleares the dispalyed status when the Clear button is clicked.
+- Automatically switches text direction based on the ditected language (LTR/RTL).
 
 ## How it works
 The tool searches for phone numbers that:

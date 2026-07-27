@@ -47,20 +47,19 @@ mask.addEventListener('click', ()=>{
     const hasPersianDigits = /[۰-۹]/.test(text);
 
     const normalizedText = normalizeDigits(text);
-    console.log('1:', normalizedText);
 
     let result = securePhoneNumber(normalizedText);
-    console.log('2:', result);
     
     const count = countNumbers(normalizedText);
 
     if(hasPersianDigits){
         result = toPersianDigits(result);
-        console.log('3:', result);
     }
 
     output.value = result;
     autoResize(output);
+    setDirection(output);
+
     status.textContent = `${count} number(s) masked`;
 
     sessionStorage.setItem('input', text);
@@ -75,6 +74,9 @@ clear.addEventListener('click', ()=>{
 
     autoResize(input);
     autoResize(output);
+
+    resetDirection(input);
+    resetDirection(output);
 
     sessionStorage.removeItem('input');
     sessionStorage.removeItem('output');
@@ -100,8 +102,29 @@ function autoResize(el){
     el.style.height = "auto";
     el.style.height =  Math.min(el.scrollHeight, 100) + "px";    
 };
+
+function setDirection(element){
+    const hasPersian = /[\u0600-\u06FF]/.test(element.value);
+
+    if(hasPersian){
+        element.style.direction = 'rtl';
+        element.style.textAlign = 'right';
+    }else{
+        element.style.direction = 'ltr';
+        element.style.textAlign = 'left';
+    }
+}
+
+function resetDirection(element){
+    element.style.direction = 'ltr';
+    element.style.textAlign = 'left';
+}
+
 input.addEventListener('input', ()=>{
     autoResize(input);
+    setDirection(input);
+
+    sessionStorage.setItem('input', input.value)
 });
 
 window.addEventListener('DOMContentLoaded', ()=>{
@@ -111,9 +134,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
     if(savedInput){
         input.value = savedInput;
+        setDirection(input);
     };
     if(savedOutput){
         output.value = savedOutput;
+        setDirection(output);
     };
     if(savedStatus){
         status.textContent = `${savedStatus} number(s) masked`;

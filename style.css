@@ -34,7 +34,9 @@ textarea{
     overflow-y: visible;
     border: 1px solid rgba(0, 0, 0, 0.501);
     border-radius: 2px;
-    word-wrap: 1px;
+    padding-left: 10px;
+    word-spacing: -3px;
+    font-size: 15px;
 }  
 textarea:focus{
     outline: 1px solid rgba(0, 0, 0, 0.626);
